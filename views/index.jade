@@ -1,5 +1,20 @@
-extends layout
+doctype html
+html
+  head
+    title Viewer
+    style.
+      html, body { margin: 0; padding: 0; font: 11px sans-serif; background: white }
+      ul.scrubber li { display: none; }
+      ul.scrubber { height: 480px; width: 480; }
+  body
+    canvas(
+      data-3dviewer-url= url
+      data-3dviewer-x= x
+      data-3dviewer-y= y
+      data-3dviewer-z= z
+      width=480
+      height=480
+    )
 
-block content
-  h1= title
-  p Welcome to #{title}
+    != js("jsc3d")
+    != js("viewer")
