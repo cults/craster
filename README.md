@@ -1,10 +1,10 @@
 Craster
 =======
 
-Turns 3D models into a set of PNGs.
+Turn 3D models into a set of PNGs.
 
-Rasterizes the models thanks to JSC3D, takes captures thanks to CasperJS and
-PhantomJS.
+Rasterization thanks to JSC3D, browser emulation thanks to PhantomJS and
+captures thanks to CasperJS.
 
 Usage
 ------
@@ -20,6 +20,8 @@ Usage
       -x NUMBER              3D X (Default is 0)
       -y NUMBER              3D Y for the start (Default is 0)
       -z NUMBER              3D Z (Default is 0)
+          --width [NUMBER]   Image width (Default is 1000)
+          --height [NUMBER]  Image height (Default is 1000)
           --port [NUMBER]    Port for the temporary http server that serves the
                              viewer  (Default is 3222)
       -s, --no-progress      Disable progress

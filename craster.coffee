@@ -12,8 +12,8 @@ cli.parse
   x: ['x', '3D X (Default is 0)', 'number', 0]
   y: ['y', '3D Y for the start (Default is 0)', 'number', 0]
   z: ['z', '3D Z (Default is 0)', 'number', 0]
-  width: ['w', 'Image width', 'number', 1000]
-  height: ['h', 'Image height', 'number', 1000]
+  width: ['width', 'Image width', 'number', 1000]
+  height: ['height', 'Image height', 'number', 1000]
   port: ['port', 'Port for the temporary http server that serves the viewer', 'number', 3222]
   'no-progress': ['s', 'Disable progress']
 
