@@ -19,7 +19,7 @@ cli.parse
 
 cli.main (args, options) ->
   http.set 'port', options.port
-  http.listen options.port, ->
+  server = http.listen options.port, ->
     cli.debug 'HTTP server listening on port ' + options.port
 
     url = "http://localhost:#{options.port}/" + \
@@ -48,7 +48,7 @@ cli.main (args, options) ->
         cli.error "Casper exited with a status of #{status}"
       else
         cli.debug "done"
-      process.kill 'SIGHUP'
+      server.close()
 
 casperjs = (args, log, onExit) ->
     cmd = spawn("casperjs", args ?= [])
