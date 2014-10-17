@@ -15,7 +15,7 @@ Usage
 
     Options:
           --url [URL]        URL of the 3D model (Default is http://localhost:3222/example.stl)
-          --path [PATH]      Captures path (Default is tmp/screen)
+          --path [PATH]      Captures path (Default is tmp/craster)
       -n, --num [NUMBER]     Number of captures (Default is 20)
       -x NUMBER              3D X (Default is 0)
       -y NUMBER              3D Y for the start (Default is 0)

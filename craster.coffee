@@ -7,7 +7,7 @@ cli.enable 'status', 'version'
 cli.setApp 'craster', '1.0.0'
 cli.parse
   url: ['url', 'URL of the 3D model', 'URL', 'http://localhost:3222/example.stl']
-  path: ['path', 'Captures path', 'PATH', 'tmp/screen']
+  path: ['path', 'Captures path', 'PATH', 'tmp/craster']
   num: ['n', 'Number of captures', 'number', 20]
   x: ['x', '3D X (Default is 0)', 'number', 0]
   y: ['y', '3D Y for the start (Default is 0)', 'number', 0]
@@ -53,6 +53,6 @@ cli.main (args, options) ->
 casperjs = (args, log, onExit) ->
     cmd = spawn("casperjs", args ?= [])
     cmd.stdout.on 'data', (data) -> log data.toString().trim()
-    cmd.stderr.on 'data', (data) -> cli.error data.toString().trim()
+    cmd.stderr.on 'data', (data) -> console.error data.toString().trim()
     if onExit? then cmd.on 'exit', onExit
     cmd
