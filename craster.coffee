@@ -1,6 +1,7 @@
 {spawn} = require('child_process')
 cli = require('cli')
 http = require('./http')
+path = require('path')
 
 cli.enable 'status', 'version'
 cli.setApp 'craster', '1.0.0'
@@ -32,7 +33,8 @@ cli.main (args, options) ->
       else
         cli.debug str
 
-    casperjs ["capture.coffee", url, options.path, options.num], log, (status) ->
+    capture = path.join(__dirname, 'capture.coffee')
+    casperjs [capture, url, options.path, options.num], log, (status) ->
       if status != 0
         cli.error "Casper exited with a status of #{status}"
       process.kill 'SIGHUP'

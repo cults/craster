@@ -3,18 +3,26 @@ express = require('express')
 path = require('path')
 bodyParser = require('body-parser')
 assets = require('connect-assets')
-index = require('./routes/index')
 
 # Setup app
 http = express()
 http.set 'views', path.join(__dirname, 'views')
 http.set 'view engine', 'jade'
 
-# Mount engines and routes
+# Router
+router = express.Router()
+router.get '/', (req, res) ->
+  res.render 'index',
+    url: req.param('url'),
+    x: req.param('x'),
+    y: req.param('y'),
+    z: req.param('z')
+
+# Mount engines
 http.use bodyParser.urlencoded(extended: false)
-http.use assets()
+http.use assets(paths: [path.join(__dirname, 'assets', 'js')])
 http.use express.static(path.join(__dirname, 'public'))
-http.use '/', index
+http.use '/', router
 
 # catch 404 and forward to error handler
 http.use (req, res, next) ->
