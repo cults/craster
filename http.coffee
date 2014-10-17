@@ -13,9 +13,11 @@ http.set 'view engine', 'jade'
 router = express.Router()
 router.get '/', (req, res) ->
   res.render 'index',
-    url: req.param('url'),
-    x: req.param('x'),
-    y: req.param('y'),
+    url: req.param('url')
+    width: req.param('width')
+    height: req.param('height')
+    x: req.param('x')
+    y: req.param('y')
     z: req.param('z')
 
 # Mount engines

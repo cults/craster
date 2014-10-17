@@ -12,6 +12,8 @@ cli.parse
   x: ['x', '3D X (Default is 0)', 'number', 0]
   y: ['y', '3D Y for the start (Default is 0)', 'number', 0]
   z: ['z', '3D Z (Default is 0)', 'number', 0]
+  width: ['w', 'Image width', 'number', 1000]
+  height: ['h', 'Image height', 'number', 1000]
   port: ['port', 'Port for the temporary http server that serves the viewer', 'number', 3222]
   'no-progress': ['s', 'Disable progress']
 
@@ -22,9 +24,11 @@ cli.main (args, options) ->
 
     url = "http://localhost:#{options.port}/" + \
       "?url=#{encodeURIComponent options.url}" + \
-      "&x=#{encodeURIComponent options.x}" + \
-      "&y=#{encodeURIComponent options.y}" + \
-      "&z=#{encodeURIComponent options.z}"
+      "&x=#{options.x}" + \
+      "&y=#{options.y}" + \
+      "&z=#{options.z}" + \
+      "&width=#{options.width}" + \
+      "&height=#{options.height}"
 
     log = (str) ->
       if match = str.match(/^(\d+)\/\d+: /)
@@ -33,10 +37,17 @@ cli.main (args, options) ->
       else
         cli.debug str
 
-    capture = path.join(__dirname, 'capture.coffee')
-    casperjs [capture, url, options.path, options.num], log, (status) ->
+    capture = [path.join(__dirname, 'capture.coffee'),
+               url,
+               options.path,
+               options.num,
+               options.width,
+               options.height]
+    casperjs capture, log, (status) ->
       if status != 0
         cli.error "Casper exited with a status of #{status}"
+      else
+        cli.debug "done"
       process.kill 'SIGHUP'
 
 casperjs = (args, log, onExit) ->
