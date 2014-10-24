@@ -6,14 +6,14 @@ path = require('path')
 cli.enable 'status', 'version'
 cli.setApp 'craster', '1.0.0'
 cli.parse
-  url: ['url', 'URL of the 3D model', 'URL', 'http://localhost:3222/example.stl']
-  path: ['path', 'Captures path', 'PATH', 'tmp/craster']
+  url: ['u', 'URL of the 3D model', 'URL', 'http://localhost:3222/example.stl']
+  path: ['p', 'Captures path', 'PATH', 'tmp/craster']
   num: ['n', 'Number of captures', 'number', 20]
   x: ['x', '3D X (Default is 0)', 'number', 0]
   y: ['y', '3D Y for the start (Default is 0)', 'number', 0]
   z: ['z', '3D Z (Default is 0)', 'number', 0]
-  width: ['width', 'Image width', 'number', 1000]
-  height: ['height', 'Image height', 'number', 1000]
+  width: ['W', 'Image width', 'number', 1000]
+  height: ['H', 'Image height', 'number', 1000]
   port: ['port', 'Port for the temporary http server that serves the viewer', 'number', 3222]
   'no-progress': ['s', 'Disable progress']
 
