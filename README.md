@@ -14,7 +14,7 @@ Usage
       craster [OPTIONS] [ARGS]
 
     Options:
-      -u, --url [URL]        URL of the 3D model (Default is http://localhost:3222/example.stl)
+      -u, --url STRING       URL of the 3D model
       -p, --path [PATH]      Captures path (Default is tmp/craster)
       -n, --num [NUMBER]     Number of captures (Default is 20)
       -x NUMBER              3D X (Default is 0)
@@ -40,5 +40,5 @@ Install
 Test
 ---
 
-    $ craster
+    $ craster --url 'http://localhost:3222/example.stl'
     $ open tmp/craster-*
