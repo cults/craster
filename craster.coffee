@@ -14,19 +14,22 @@ cli.parse
   z: [false, '3D Z (Default is 0)', 'int', 0]
   width: ['W', 'Image width', 'int', 1000]
   height: ['H', 'Image height', 'int', 1000]
-  port: [false, 'Port for the temporary http server that serves the viewer', 'int', 3222]
+  port: [false, 'Port for the temporary http server that serves the viewer',
+         'int', 0]
   'no-progress': ['s', 'Disable progress']
 
 cli.main (args, options) ->
   unless options.url
-    example = "http://localhost:#{options.port}/example.stl"
-    cli.fatal "Please provide a URL. Use `craster --url '#{example}'`"
+    example = "'http://localhost:3000/example.stl'"
+    cli.fatal "Please provide a URL. Use `craster --url #{example} --port 3000`"
 
   http.set 'port', options.port
   server = http.listen options.port, ->
-    cli.debug 'HTTP server listening on port ' + options.port
+    host = server.address().address
+    port = server.address().port
+    cli.debug "HTTP server listening on #{host}:#{port}"
 
-    url = "http://localhost:#{options.port}/" + \
+    url = "http://#{host}:#{port}/" + \
       "?url=#{encodeURIComponent options.url}" + \
       "&x=#{options.x}" + \
       "&y=#{options.y}" + \

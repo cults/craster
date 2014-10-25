@@ -22,8 +22,8 @@ Usage
       -z NUMBER              3D Z (Default is 0)
       -W, --width [NUMBER]   Image width (Default is 1000)
       -H, --height [NUMBER]  Image height (Default is 1000)
-          --port [NUMBER]    Port for the temporary http server that serves the
-                             viewer  (Default is 3222)
+          --port NUMBER      Port for the temporary http server that serves the
+                             viewer
       -s, --no-progress      Disable progress
       -k, --no-color         Omit color from output
           --debug            Show debug information
