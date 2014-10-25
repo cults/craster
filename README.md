@@ -1,7 +1,7 @@
 Craster
 =======
 
-Turn 3D models into a set of PNGs.
+Turn 3D models into PNGs.
 
 Rasterization thanks to JSC3D, browser emulation thanks to PhantomJS and
 captures thanks to CasperJS.

@@ -1,12 +1,11 @@
 {
   "name": "craster",
   "version": "1.1.0",
-  "private": true,
+  "description": "Turn 3D models into PNGs",
+  "keywords": ["stl", "3d", "capture", "png", "raster"],
+  "author": "Sunny Ripert <sunny@sunfox.org> (http://sunfox.org)",
   "homepage": "https://github.com/sunny/craster",
-  "author": "Sunny Ripert",
-  "bin": {
-    "craster": "./bin/craster"
-  },
+  "bin": "./bin/craster",
   "repository": {
     "type": "git",
     "url": "https://github.com/sunny/craster"
@@ -23,5 +22,9 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+  "licence": "MIT",
+  "bugs": {
+    "url": "https://github.com/sunny/craster/issues"
   }
 }
