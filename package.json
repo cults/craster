@@ -2,7 +2,13 @@
   "name": "craster",
   "version": "1.2.0",
   "description": "Turn 3D models into PNGs",
-  "keywords": ["stl", "3d", "capture", "png", "raster"],
+  "keywords": [
+    "stl",
+    "3d",
+    "capture",
+    "png",
+    "raster"
+  ],
   "author": "Sunny Ripert <sunny@sunfox.org> (http://sunfox.org)",
   "homepage": "https://github.com/sunny/craster",
   "bin": "./bin/craster",
@@ -11,14 +17,14 @@
     "url": "https://github.com/sunny/craster"
   },
   "dependencies": {
-    "express": "~4.9.0",
-    "body-parser": "~1.8.1",
+    "express": "~4.9.8",
     "debug": "~2.0.0",
     "jade": "~1.6.0",
     "coffee-script": "~1.8.0",
     "casper": "~0.1.1",
     "connect-assets": "~4.3.3",
-    "cli": "~0.6.4"
+    "cli": "~0.6.4",
+    "body-parser": "~1.9.2"
   },
   "engines": {
     "node": ">=0.8.0"
