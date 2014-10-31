@@ -27,6 +27,9 @@ rotateY = (y) ->
   window.viewer.rotate(0, y, 0)
   window.viewer.update()
 
+casper.on "page.error", (msg) ->
+  @echo msg
+
 casper.echo "Capturing #{total} #{width}x#{height} pictures from #{url} in #{path}"
 casper.start url
 

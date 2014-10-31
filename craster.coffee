@@ -14,9 +14,10 @@ cli.parse
   z: [false, '3D Z (Default is 0)', 'int', 0]
   width: ['W', 'Image width', 'int', 1000]
   height: ['H', 'Image height', 'int', 1000]
+  'no-progress': ['s', 'Disable progress']
   port: [false, 'Port for the temporary http server that serves the viewer',
          'int', 0]
-  'no-progress': ['s', 'Disable progress']
+  'debug-wait': [false, 'Debug and keep http server open']
 
 cli.main (args, options) ->
   unless options.url
@@ -44,7 +45,8 @@ cli.main (args, options) ->
       else
         cli.debug str
 
-    capture = [path.join(__dirname, 'capture.coffee'),
+    capture = ['--web-security=false',
+               path.join(__dirname, 'capture.coffee'),
                url,
                options.path,
                options.num,
@@ -55,7 +57,7 @@ cli.main (args, options) ->
         cli.error "Casper exited with a status of #{status}"
       else
         cli.debug "done"
-      server.close()
+      server.close() unless options['debug-wait']
 
 casperjs = (args, log, onExit) ->
     cmd = spawn("casperjs", args ?= [])
