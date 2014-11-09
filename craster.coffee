@@ -45,23 +45,24 @@ cli.main (args, options) ->
       else
         cli.debug str
 
-    capture = ['--web-security=false',
-               path.join(__dirname, 'capture.coffee'),
-               url,
-               options.path,
-               options.num,
-               options.width,
-               options.height]
-    casperjs capture, log, (status) ->
+    args = [url,
+            options.path,
+            options.num,
+            options.width,
+            options.height]
+    phantomjs args, log, (status) ->
       if status != 0
-        cli.error "Casper exited with a status of #{status}"
+        cli.error "Command exited with a status of #{status}"
       else
         cli.debug "done"
       server.close() unless options['debug-wait']
 
-casperjs = (args, log, onExit) ->
-    cmd = spawn("casperjs", args ?= [])
-    cmd.stdout.on 'data', (data) -> log data.toString().trim()
-    cmd.stderr.on 'data', (data) -> console.error data.toString().trim()
-    if onExit? then cmd.on 'exit', onExit
-    cmd
+phantomjs = (args, log, onExit) ->
+  args.unshift path.join(__dirname, 'capture-phantom.coffee')
+  args.unshift '--web-security=false'
+
+  cmd = spawn("phantomjs", args ?= [])
+  cmd.stdout.on 'data', (data) -> log data.toString().trim()
+  cmd.stderr.on 'data', (data) -> console.error data.toString().trim()
+  if onExit? then cmd.on 'exit', onExit
+  cmd

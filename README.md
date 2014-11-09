@@ -3,8 +3,8 @@ Craster
 
 Turn 3D models into PNGs.
 
-Rasterization thanks to JSC3D, browser emulation thanks to PhantomJS and
-captures thanks to CasperJS.
+Rasterization thanks to JSC3D, browser emulation and captures thanks to
+PhantomJS.
 
 Usage
 ------
@@ -34,12 +34,17 @@ Usage
 Install
 -------
 
+    $ npm install -g craster
+
+
+Local Development
+-----------------
+
     $ git clone https://github.com/sunny/craster
     $ cd craster
-    $ npm install -g
+    $ npm install
 
-Test
----
+## Test with a fake file
 
-    $ craster --url 'http://localhost:3222/example.stl'
+    $ bin/craster --url 'http://localhost:3222/example.stl' --debug --debug-wait
     $ open tmp/craster-*

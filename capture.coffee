@@ -1,45 +1,44 @@
-# Casper script that takes a capture and rotates the viewer
-# Call it via the command line:
-#
-#     $ casperjs capture.coffee URL PATH.PNG TOTAL
-#
-casper = require("casper").create
-  verbose: false
-  logLevel: "debug"
-  # waitTimeout: 15000
-  # stepTimeout: 15000
+#!/usr/bin/env phantomjs
+args = require('system').args
+async = require('async')
+page = require('webpage').create()
 
-if casper.cli.args.length < 2
-  casper.echo "Usage: $ casperjs capture.coffee URL PATH.PNG TOTAL WIDTH HEIGHT"
-  casper.exit 1
+if args.length != 6
+  console.log("Usage: phantomjs capture-phantom.coffee URL PATH TOTAL WIDTH" + \
+              " HEIGHT")
+  phantom.exit(1)
+else
+  url = args[1]
+  path = args[2]
+  total = parseInt args[3], 10
+  width = parseInt args[4], 10
+  height = parseInt args[5], 10
 
-url = casper.cli.args[0]
-path = casper.cli.args[1]
-total = parseInt casper.cli.args[2]
-width = parseInt casper.cli.args[3]
-height = parseInt casper.cli.args[4]
+  increment = 360/total
+  rotations = (i for i in [0...360] by increment)
 
-increment = 360/total
-rotations = (r for r in [0...360] by increment)
-
-# Rotation by calling the 3D Viewer through the DOM
-rotateY = (y) ->
-  window.viewer.rotate(0, y, 0)
-  window.viewer.update()
-
-casper.on "page.error", (msg) ->
-  @echo msg
-
-casper.echo "Capturing #{total} #{width}x#{height} pictures from #{url} in #{path}"
-casper.start url
-
-casper.each rotations, (casper, rotation, i) ->
-  @then ->
-    casper.echo "#{i}/#{total}: Rotate to #{rotation}"
+  image_path = (rotation) ->
     num = ("000" + rotation).slice(-3)
-    new_path = path.replace('.png', '') + "-#{num}.png"
-    @capture new_path, top: 0, left: 0, width: width, height: height
+    path.replace('.png', '') + "-#{num}.png"
 
-  @thenEvaluate(rotateY, increment)
+  # Rotation by calling the 3D Viewer through the DOM
+  rotateY = (y) ->
+    window.viewer.rotate(0, y, 0)
+    window.viewer.update()
 
-casper.run()
+  rotator = (i, callback) ->
+    rotation = i * increment
+    console.log("#{i}/#{total}: Rotate to #{rotation}")
+    page.evaluate(rotateY, increment)
+    window.setTimeout((->
+      page.render(image_path(rotation))
+      callback()
+    ), 100)
+
+  page.viewportSize = { width: width, height: height }
+  page.paperSize = { width: width, height: height }
+  page.clipRect = { top: 0, left: 0, width: width, height: height }
+  page.onConsoleMessage = (msg) -> console.log("console: #{msg}")
+  page.open url, ->
+    async.eachSeries [0..total], rotator, ->
+      phantom.exit()
