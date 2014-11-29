@@ -1,2 +1,3 @@
-#!/usr/bin/env coffee
-require '../craster'
+#!/usr/bin/env node
+require('coffee-script/register')
+require('../craster')
