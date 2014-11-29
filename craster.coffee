@@ -58,7 +58,7 @@ cli.main (args, options) ->
       server.close() unless options['debug-wait']
 
 phantomjs = (args, log, onExit) ->
-  args.unshift path.join(__dirname, 'capture-phantom.coffee')
+  args.unshift path.join(__dirname, 'capture.coffee')
   args.unshift '--web-security=false'
 
   cmd = spawn("phantomjs", args ?= [])
