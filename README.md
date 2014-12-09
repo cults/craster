@@ -46,5 +46,5 @@ Local Development
 
 ## Test with a fake file
 
-    $ bin/craster --url 'http://localhost:3222/example.stl' --debug --debug-wait
+    $ bin/craster --port 3222 --url 'http://0.0.0.0:3222/example.stl' --debug --debug-wait
     $ open tmp/craster-*

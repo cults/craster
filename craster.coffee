@@ -60,6 +60,7 @@ cli.main (args, options) ->
 phantomjs = (args, log, onExit) ->
   args.unshift path.join(__dirname, 'capture.coffee')
   args.unshift '--web-security=false'
+  cli.debug 'phantomjs ' + args.join(' ')
 
   cmd = spawn("phantomjs", args ?= [])
   cmd.stdout.on 'data', (data) -> log data.toString().trim()
