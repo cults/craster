@@ -9,7 +9,7 @@ PhantomJS.
 Usage
 ------
 
-    $ bin/craster --help
+    $ craster --help
     Usage:
       craster [OPTIONS] [ARGS]
 
@@ -44,7 +44,7 @@ Local Development
     $ cd craster
     $ npm install
 
-## Test with a fake file
+### Test with a fake file
 
     $ bin/craster --port 3222 --url 'http://0.0.0.0:3222/example.stl' --debug --debug-wait
     $ open tmp/craster-*
