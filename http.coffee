@@ -3,25 +3,25 @@ express = require('express')
 path = require('path')
 bodyParser = require('body-parser')
 assets = require('connect-assets')
+jade = require('jade')
 
 # Setup app
 http = express()
+http.engine 'jade', jade.__express
 http.set 'views', path.join(__dirname, 'views')
-http.set 'view engine', 'jade'
 
 # Router
 router = express.Router()
 router.get '/', (req, res) ->
-  res.render 'index',
-    url: req.param('url')
-    width: req.param('width')
-    height: req.param('height')
-    x: req.param('x')
-    y: req.param('y')
-    z: req.param('z')
+  res.render 'index.jade',
+    url: req.query.url
+    width: req.query.width || 1000
+    height: req.query.height || 1000
+    x: req.query.x || 0
+    y: req.query.y || 0
+    z: req.query.z || 0
 
 # Mount engines
-http.use bodyParser.urlencoded(extended: false)
 http.use assets(paths: [path.join(__dirname, 'assets', 'js')])
 http.use express.static(path.join(__dirname, 'public'))
 http.use '/', router
