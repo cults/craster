@@ -21,8 +21,8 @@ cli.parse
 
 cli.main (args, options) ->
   unless options.url
-    example = "'http://localhost:3000/example.stl'"
-    cli.fatal "Please provide a URL. Use `craster --url #{example} --port 3000`"
+    example = "'http://0.0.0.0:3000/example.stl'"
+    cli.fatal "Please provide a URL. For example try `craster --url #{example} --port 3000`"
 
   http.set 'port', options.port
   server = http.listen options.port, ->
