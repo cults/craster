@@ -1,4 +1,3 @@
-#!/usr/bin/env phantomjs
 args = require('system').args
 async = require('async')
 page = require('webpage').create()

@@ -44,7 +44,15 @@ Local Development
     $ cd craster
     $ npm install
 
-### Test with a fake file
+## Compile
+
+    $ coffee --compile capture.coffee
+
+## Try with a fake file
 
     $ bin/craster --port 3222 --url 'http://0.0.0.0:3222/example.stl' --debug --debug-wait
     $ open tmp/craster-*
+
+## Publish
+
+    $ npm publish

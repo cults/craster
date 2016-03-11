@@ -58,9 +58,9 @@ cli.main (args, options) ->
       server.close() unless options['debug-wait']
 
 phantomjs = (args, log, onExit) ->
-  args.unshift path.join(__dirname, 'capture.coffee')
+  args.unshift path.join(__dirname, 'capture.js')
   args.unshift '--web-security=false'
-  cli.debug 'phantomjs ' + args.join(' ')
+  cli.debug "phantomjs #{args.join(' ')}"
 
   cmd = spawn("phantomjs", args ?= [])
   cmd.stdout.on 'data', (data) -> log data.toString().trim()
