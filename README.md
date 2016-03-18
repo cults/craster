@@ -61,4 +61,5 @@ Change the version in `package.json` and `craster.coffee`, then:
     $ git commit -m v42.0.0
     $ git tag v42.0.0
     $ git push
+    $ git push --tags
     $ npm publish
