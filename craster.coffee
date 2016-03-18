@@ -14,6 +14,7 @@ cli.parse
   z: [false, '3D Z (Default is 0)', 'int', 0]
   width: ['W', 'Image width', 'int', 1000]
   height: ['H', 'Image height', 'int', 1000]
+  color: ['c', 'Color for the 3D model', 'string', '#eeeeee']
   'no-progress': ['s', 'Disable progress']
   port: [false, 'Port for the temporary http server that serves the viewer',
          'int', 0]
@@ -36,7 +37,8 @@ cli.main (args, options) ->
       "&y=#{options.y}" + \
       "&z=#{options.z}" + \
       "&width=#{options.width}" + \
-      "&height=#{options.height}"
+      "&height=#{options.height}" + \
+      "&color=#{options.color}"
 
     log = (str) ->
       if match = str.match(/^(\d+)\/\d+: /)

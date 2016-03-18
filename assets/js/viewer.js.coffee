@@ -1,4 +1,5 @@
 container = document.getElementsByTagName('canvas')[0]
+color = container.attributes['data-3dviewer-color']?.value
 url = container.attributes['data-3dviewer-url']?.value
 x = container.attributes['data-3dviewer-x']?.value
 y = container.attributes['data-3dviewer-y']?.value
@@ -12,7 +13,7 @@ viewer = new JSC3D.Viewer(container)
 window.viewer = viewer
 
 viewer.setParameter 'SceneUrl', url
-viewer.setParameter 'ModelColor', '#822ef5'
+viewer.setParameter 'ModelColor', color
 viewer.setParameter 'InitRotationX', x
 viewer.setParameter 'InitRotationY', y
 viewer.setParameter 'InitRotationZ', z

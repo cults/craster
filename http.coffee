@@ -15,6 +15,7 @@ router = express.Router()
 router.get '/', (req, res) ->
   res.render 'index.jade',
     url: req.query.url
+    color: req.query.color || '#eeeeee'
     width: req.query.width || 1000
     height: req.query.height || 1000
     x: req.query.x || 0
