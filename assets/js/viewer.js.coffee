@@ -13,7 +13,7 @@ viewer = new JSC3D.Viewer(container)
 window.viewer = viewer
 
 viewer.setParameter 'SceneUrl', url
-viewer.setParameter 'ModelColor', color
+viewer.setParameter 'ModelColor', "##{color}"
 viewer.setParameter 'InitRotationX', x
 viewer.setParameter 'InitRotationY', y
 viewer.setParameter 'InitRotationZ', z
