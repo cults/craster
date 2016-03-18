@@ -18,7 +18,7 @@ else
 
   image_path = (rotation) ->
     num = ("000" + rotation).slice(-3)
-    path.replace('.png', '') + "-#{num}.png"
+    path.replace(".png", "") + "-#{num}.png"
 
   # Rotation by calling the 3D Viewer through the DOM
   rotateY = (y) ->
@@ -32,7 +32,7 @@ else
     window.setTimeout((->
       page.render(image_path(rotation))
       callback()
-    ), 100)
+    ), 200)
 
   page.viewportSize = { width: width, height: height }
   page.paperSize = { width: width, height: height }
@@ -42,4 +42,4 @@ else
     window.setTimeout((->
       async.eachSeries [0..total], rotator, ->
         phantom.exit()
-    ), 500)
+    ), 1000)
