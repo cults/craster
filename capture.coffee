@@ -39,5 +39,7 @@ else
   page.clipRect = { top: 0, left: 0, width: width, height: height }
   page.onConsoleMessage = (msg) -> console.log("console: #{msg}")
   page.open url, ->
-    async.eachSeries [0..total], rotator, ->
-      phantom.exit()
+    window.setTimeout((->
+      async.eachSeries [0..total], rotator, ->
+        phantom.exit()
+    ), 500)
