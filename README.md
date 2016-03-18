@@ -58,7 +58,7 @@ Local Development
 Change the version in `package.json` and `craster.coffee`, then:
 
     $ git add package.json craster.coffee
-    $ git commit -m 'v42.0.0'
+    $ git commit -m v42.0.0
     $ git tag v42.0.0
     $ git push
     $ npm publish
