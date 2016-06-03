@@ -21,6 +21,8 @@ viewer.setParameter 'RenderMode', 'flat' # can be 'smooth'
 viewer.setParameter 'Renderer', 'webgl'
 viewer.setParameter 'Background', 'off'
 viewer.setParameter 'ProgressBar', 'off'
+viewer.onloadingcomplete = ->
+  window._loadingComplete = true
 
 viewer.init()
 viewer.update()
