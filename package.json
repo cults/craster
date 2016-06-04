@@ -24,7 +24,7 @@
     "connect-assets": "~4.3.3",
     "debug": "^2.1.0",
     "express": "^4.13.4",
-    "jade": "^1.7.0",
+    "pug": "^2.0.0-alpha6",
     "phantomjs-prebuilt": "^2.1.5"
   },
   "engines": {

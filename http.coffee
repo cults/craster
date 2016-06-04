@@ -3,17 +3,17 @@ express = require('express')
 path = require('path')
 bodyParser = require('body-parser')
 assets = require('connect-assets')
-jade = require('jade')
+pug = require('pug')
 
 # Setup app
 http = express()
-http.engine 'jade', jade.__express
+http.engine 'pug', pug.__express
 http.set 'views', path.join(__dirname, 'views')
 
 # Router
 router = express.Router()
 router.get '/', (req, res) ->
-  res.render 'index.jade',
+  res.render 'index.pug',
     url: req.query.url
     color: req.query.color || 'eeeeee'
     width: req.query.width || 1000
