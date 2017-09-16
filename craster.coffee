@@ -4,7 +4,7 @@ http = require('./http')
 path = require('path')
 
 cli.enable 'status', 'version'
-cli.setApp 'craster', '1.5.6'
+cli.setApp 'craster', '1.5.7'
 cli.parse
   url: ['u', 'URL of the 3D model', 'string', false]
   path: ['p', 'Captures path', 'path', 'tmp/craster']

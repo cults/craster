@@ -53,7 +53,7 @@ Local Development
     $ bin/craster --port 3222 --url 'http://0.0.0.0:3222/example.stl' --debug --debug-wait
     $ open tmp/craster-*
 
-### Publish
+### Release
 
 Change the version in `package.json` and `craster.coffee`, then:
 
