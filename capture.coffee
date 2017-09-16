@@ -32,7 +32,7 @@ capture = (url, path, total, width, height) ->
     rotation = i * increment
     console.log("#{i}/#{total}: Rotate to #{rotation}")
     page.evaluate(rotateY, increment)
-    delay 200, ->
+    delay 10, ->
       page.render(image_path(rotation))
       callback()
 
