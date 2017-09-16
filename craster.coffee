@@ -27,7 +27,7 @@ cli.main (args, options) ->
 
   http.set 'port', options.port
   server = http.listen options.port, ->
-    host = server.address().address
+    host = '0.0.0.0'
     port = server.address().port
     cli.debug "HTTP server listening on #{host}:#{port}"
 
@@ -62,9 +62,11 @@ cli.main (args, options) ->
 phantomjs = (args, log, onExit) ->
   args.unshift path.join(__dirname, 'capture.js')
   args.unshift '--web-security=false'
-  cli.debug "phantomjs #{args.join(' ')}"
+  command = "node_modules/phantomjs-prebuilt/bin/phantomjs"
 
-  cmd = spawn("phantomjs", args ?= [])
+  cli.debug "#{command} #{args.join(' ')}"
+
+  cmd = spawn(command, args ?= [])
   cmd.stdout.on 'data', (data) -> log data.toString().trim()
   cmd.stderr.on 'data', (data) -> console.error data.toString().trim()
   if onExit? then cmd.on 'exit', onExit
