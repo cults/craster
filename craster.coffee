@@ -62,7 +62,7 @@ cli.main (args, options) ->
 phantomjs = (args, log, onExit) ->
   args.unshift path.join(__dirname, 'capture.js')
   args.unshift '--web-security=false'
-  command = "node_modules/phantomjs-prebuilt/bin/phantomjs"
+  command = "node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs"
 
   cli.debug "#{command} #{args.join(' ')}"
 
