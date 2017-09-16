@@ -37,6 +37,7 @@ capture = (url, path, total, width, height) ->
       callback()
 
   start = ->
+    console.log("Starting captures...")
     page.evaluate(rotateY, 0)
     async.eachSeries [0..total], rotator, ->
       phantom.exit()
@@ -46,6 +47,7 @@ capture = (url, path, total, width, height) ->
   page.clipRect = { top: 0, left: 0, width: width, height: height }
   page.onConsoleMessage = (msg) -> console.log("console: #{msg}")
   page.open url, ->
+    console.log("Wait until loading complete...")
     waitUntil(isLoadingComplete, start)
 
 if args.length != 6

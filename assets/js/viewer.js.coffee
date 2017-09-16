@@ -5,7 +5,6 @@ x = container.attributes['data-3dviewer-x']?.value
 y = container.attributes['data-3dviewer-y']?.value
 z = container.attributes['data-3dviewer-z']?.value
 
-# View
 # See also https://code.google.com/p/jsc3d/wiki/StartupParameters
 viewer = new JSC3D.Viewer(container)
 
@@ -24,5 +23,6 @@ viewer.setParameter 'ProgressBar', 'off'
 viewer.onloadingcomplete = ->
   window._loadingComplete = true
 
+console.log("JSC3D init #{url}")
 viewer.init()
 viewer.update()
