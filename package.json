@@ -24,8 +24,8 @@
     "connect-assets": "~5.4.0",
     "debug": "^2.1.0",
     "express": "^4.13.4",
-    "pug": "^2.0.0-alpha6",
-    "phantomjs-prebuilt": "^2.1.5"
+    "phantomjs-prebuilt": "^2.1.5",
+    "pug": "^2.0.0-alpha6"
   },
   "engines": {
     "node": ">=0.8.0"

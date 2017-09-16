@@ -9,18 +9,20 @@ pug = require('pug')
 http = express()
 http.engine 'pug', pug.__express
 http.set 'views', path.join(__dirname, 'views')
+http.set 'view engine', 'pug'
 
 # Router
 router = express.Router()
 router.get '/', (req, res) ->
+  query = req.query
   res.render 'index.pug',
-    url: req.query.url
-    color: req.query.color || 'eeeeee'
-    width: req.query.width || 1000
-    height: req.query.height || 1000
-    x: req.query.x || 0
-    y: req.query.y || 0
-    z: req.query.z || 0
+    url: query.url
+    color: query.color || 'eeeeee'
+    width: query.width || 1000
+    height: query.height || 1000
+    x: query.x || 0
+    y: query.y || 0
+    z: query.z || 0
 
 # Mount engines
 http.use assets(paths: [path.join(__dirname, 'assets', 'js')])
