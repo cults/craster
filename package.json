@@ -25,7 +25,7 @@
     "debug": "^2.1.0",
     "express": "^4.13.4",
     "phantomjs-prebuilt": "^2.1.15",
-    "pug": "^2.0.0-alpha6"
+    "pug": "^2.0.0-rc.4"
   },
   "engines": {
     "node": ">=0.8.0"
