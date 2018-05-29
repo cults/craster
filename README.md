@@ -55,8 +55,8 @@ Change the version in `package.json`, then:
 
     $ npm install
     $ git add package.json package-lock.json
-    $ git commit -m v42.0.0
-    $ git tag v42.0.0
+    $ git commit -m v`jq -r '.version' < package.json`
+    $ git tag v`jq -r '.version' < package.json`
     $ git push
     $ git push --tags
     $ npm publish
