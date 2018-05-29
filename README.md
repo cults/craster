@@ -44,10 +44,6 @@ Local Development
     $ cd craster
     $ npm install
 
-### Compile
-
-    $ coffee --compile capture.coffee
-
 ### Try with a fake file
 
     $ bin/craster --port 3222 --url 'http://0.0.0.0:3222/example.stl' --debug --debug-wait
@@ -55,9 +51,9 @@ Local Development
 
 ### Release
 
-Change the version in `package.json` and `craster.coffee`, then:
+Change the version in `package.json` and `craster.js`, then:
 
-    $ git add package.json craster.coffee
+    $ git add package.json craster.js
     $ git commit -m v42.0.0
     $ git tag v42.0.0
     $ git push
