@@ -2,9 +2,10 @@ const { spawn } = require('child_process')
 const cli = require('cli')
 const http = require('./http')
 const path = require('path')
+const package = require('./package.json')
 
 cli.enable('status', 'version')
-cli.setApp('craster', '1.5.9')
+cli.setApp('craster', package.version)
 cli.parse({
   url: ['u', 'URL of the 3D model', 'string', false],
   path: ['p', 'Captures path', 'path', 'tmp/craster'],

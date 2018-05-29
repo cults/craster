@@ -51,9 +51,9 @@ Local Development
 
 ### Release
 
-Change the version in `package.json` and `craster.js`, then:
+Change the version in `package.json`, then:
 
-    $ git add package.json craster.js
+    $ git add package.json
     $ git commit -m v42.0.0
     $ git tag v42.0.0
     $ git push
