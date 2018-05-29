@@ -39,7 +39,7 @@ cli.main(function(args, options) {
     var port = server.address().port
     cli.debug('HTTP server listening on ' + host + ':' + port)
 
-    let url = 'http://' + host + ':' + port + '/'
+    var url = 'http://' + host + ':' + port + '/'
     url += '?url=' + encodeURIComponent(options.url)
     url += '&x=' + options.x
     url += '&y=' + options.y

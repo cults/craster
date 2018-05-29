@@ -26,7 +26,7 @@ router.get('/', function(req, res) {
       x: query.x || 0,
       y: query.y || 0,
       z: query.z || 0,
-    },
+    }
   )
 })
 
