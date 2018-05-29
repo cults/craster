@@ -1,8 +1,8 @@
-const { spawn } = require('child_process')
-const cli = require('cli')
-const http = require('./http')
-const path = require('path')
-const package = require('./package.json')
+var spawn = require('child_process').spawn
+var cli = require('cli')
+var http = require('./http')
+var path = require('path')
+var package = require('./package.json')
 
 cli.enable('status', 'version')
 cli.setApp('craster', package.version)
@@ -26,30 +26,30 @@ cli.parse({
   'debug-wait': [false, 'Debug and keep http server open'],
 })
 
-cli.main((args, options) => {
+cli.main(function(args, options) {
   if (!options.url) {
-    const exampleUrl = "'http://0.0.0.0:3000/example.stl'"
-    const example = `craster --url ${exampleUrl} --port 3000`
-    cli.fatal(`Please provide a URL. For example try:\n    ${example}`)
+    var exampleUrl = "'http://0.0.0.0:3000/example.stl'"
+    var example = 'craster --url ' + exampleUrl + ' --port 3000'
+    cli.fatal("Please provide a URL. For example try:\n    " + example)
   }
 
   http.set('port', options.port)
-  const server = http.listen(options.port, () => {
-    const host = '0.0.0.0'
-    const port = server.address().port
-    cli.debug(`HTTP server listening on ${host}:${port}`)
+  var server = http.listen(options.port, function() {
+    var host = '0.0.0.0'
+    var port = server.address().port
+    cli.debug('HTTP server listening on ' + host + ':' + port)
 
-    let url = `http://${host}:${port}/`
-    url += `?url=${encodeURIComponent(options.url)}`
-    url += `&x=${options.x}`
-    url += `&y=${options.y}`
-    url += `&z=${options.z}`
-    url += `&width=${options.width}`
-    url += `&height=${options.height}`
-    url += `&color=${options.color}`
+    let url = 'http://' + host + ':' + port + '/'
+    url += '?url=' + encodeURIComponent(options.url)
+    url += '&x=' + options.x
+    url += '&y=' + options.y
+    url += '&z=' + options.z
+    url += '&width=' + options.width
+    url += '&height=' + options.height
+    url += '&color=' + options.color
 
-    const log = (str) => {
-      const match = str.match(/^(\d+)\/\d+: /)
+    function log(str) {
+      var match = str.match(/^(\d+)\/\d+: /)
       if (match) {
         if (!options['no-progress']) {
           cli.progress((parseInt(match[1])+1) / options.num)
@@ -59,7 +59,7 @@ cli.main((args, options) => {
       }
     }
 
-    const args = [
+    var args = [
       url,
       options.path,
       options.num,
@@ -67,9 +67,9 @@ cli.main((args, options) => {
       options.height,
     ]
 
-    phantomjs(args, log, (status) => {
+    phantomjs(args, log, function(status) {
       if (status != 0) {
-        cli.error(`Command exited with a status of ${status}`)
+        cli.error('Command exited with a status of ' + status)
       } else {
         cli.debug('done')
       }
@@ -81,12 +81,16 @@ cli.main((args, options) => {
 function phantomjs(args, log, onExit) {
   args.unshift(path.join(__dirname, 'capture.js'))
   args.unshift('--web-security=false')
-  const command = 'node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs'
+  var command = 'node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs'
 
-  cli.debug(`${command} ${args.join(' ')}`)
+  cli.debug(command + ' ' + args.join(' '))
 
-  const cmd = spawn(command, args)
-  cmd.stdout.on('data', data => log(data.toString().trim()))
-  cmd.stderr.on('data', data => console.error(data.toString().trim()))
+  var cmd = spawn(command, args)
+  cmd.stdout.on('data', function(data) {
+    log(data.toString().trim())
+  })
+  cmd.stderr.on('data', function(data) {
+    console.error(data.toString().trim())
+  })
   cmd.on('exit', onExit)
 }

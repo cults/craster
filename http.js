@@ -14,7 +14,7 @@ http.set('view engine', 'pug')
 
 // Router
 const router = express.Router()
-router.get('/', (req, res) => {
+router.get('/', function(req, res) {
   query = req.query
   res.render(
     'index.pug',
@@ -36,14 +36,14 @@ http.use(express.static(path.join(__dirname, 'public')))
 http.use('/', router)
 
 // catch 404 and forward to error handler
-http.use((req, res, next) => {
+http.use(function(req, res, next) {
   err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
 // development error handler that will print stacktrace
-http.use((err, req, res, next) => {
+http.use(function(err, req, res, next) {
   res.status(err.status || 500)
   res.render('error', { message: err.message, error: err })
 })
