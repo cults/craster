@@ -1,6 +1,6 @@
 {
   "name": "craster",
-  "version": "1.5.11",
+  "version": "1.5.12",
   "description": "Turn 3D models into PNGs",
   "keywords": [
     "stl",
@@ -17,14 +17,14 @@
     "url": "https://github.com/sunny/craster"
   },
   "dependencies": {
-    "async": "^0.9.0",
-    "body-parser": "~1.15.2",
-    "cli": "~1.0.0",
-    "connect-assets": "~5.4.0",
-    "debug": "^2.1.0",
-    "express": "^4.13.4",
-    "phantomjs-prebuilt": "^2.1.16",
-    "pug": "^2.0.0-rc.3"
+    "async": "0.9.0",
+    "body-parser": "1.15.2",
+    "cli": "1.0.0",
+    "connect-assets": "5.4.0",
+    "debug": "2.1.0",
+    "express": "4.13.4",
+    "phantomjs-prebuilt": "2.1.16",
+    "pug": "2.0.0-rc.3"
   },
   "engines": {
     "node": ">=0.8.0"
