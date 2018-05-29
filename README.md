@@ -53,7 +53,8 @@ Local Development
 
 Change the version in `package.json`, then:
 
-    $ git add package.json
+    $ npm install
+    $ git add package.json package-lock.json
     $ git commit -m v42.0.0
     $ git tag v42.0.0
     $ git push
