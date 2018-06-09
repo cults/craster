@@ -10,22 +10,23 @@ http.engine('mustache', mustacheExpress())
 http.set('view engine', 'mustache')
 http.set('views', __dirname + '/views')
 
+function crasterParams(req) {
+  const query = req.query
+  return {
+    url: query.url,
+    color: query.color || 'eeeeee',
+    width: query.width || 1000,
+    height: query.height || 1000,
+    x: query.x || 0,
+    y: query.y || 0,
+    z: query.z || 0,
+  }
+}
+
 // Router
 const router = express.Router()
 router.get('/', function(req, res) {
-  query = req.query
-  res.render(
-    'index.mustache',
-    {
-      url: query.url,
-      color: query.color || 'eeeeee',
-      width: query.width || 1000,
-      height: query.height || 1000,
-      x: query.x || 0,
-      y: query.y || 0,
-      z: query.z || 0,
-    }
-  )
+  res.render('viewer.mustache', crasterParams(req))
 })
 
 // Mount engines
