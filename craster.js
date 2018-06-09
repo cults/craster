@@ -72,7 +72,7 @@ cli.main(function(args, options) {
         if (status != 0) {
           cli.error('Command exited with a status of ' + status)
         } else {
-          cli.debug('done')
+          cli.debug('Done')
         }
         if (!options['server']) server.close()
       })

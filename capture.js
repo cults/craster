@@ -65,7 +65,7 @@ function capture(url, path, total, width, height) {
   }
 
   function start() {
-    console.log('Starting captures...')
+    console.log('Starting captures in ' + path + '...')
     page.evaluate(rotateY, 0)
     async.eachSeries(integers(total), rotator, function() {
       phantom.exit()
