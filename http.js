@@ -3,7 +3,6 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
-const assets = require('connect-assets')
 const mustacheExpress = require('mustache-express')
 
 // Setup app
@@ -32,17 +31,16 @@ router.get('/', function(req, res) {
 
 // Mount engines
 http.use(express.static(path.join(__dirname, 'public')))
-http.use(express.static(path.join(__dirname, 'assets')))
 http.use('/', router)
 
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler
 http.use(function(req, res, next) {
   err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
-// development error handler that will print stacktrace
+// Error handler that will print stacktrace
 http.use(function(err, req, res, next) {
   res.status(err.status || 500)
   res.render('error', { message: err.message, error: err })
