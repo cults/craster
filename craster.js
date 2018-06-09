@@ -3,12 +3,16 @@ var cli = require('cli')
 var http = require('./http')
 var path = require('path')
 var package = require('./package.json')
+var mergeImg = require('merge-img')
+var fs = require('fs')
+var async = require('async')
 
 cli.enable('status', 'version')
 cli.setApp('craster', package.version)
 cli.parse({
   url: ['u', 'URL of the 3D model', 'string', false],
   path: ['p', 'Captures path', 'path', 'tmp/craster'],
+  image: ['i', 'Path to final image', 'path', false],
   num: ['n', 'Number of captures', 'int', 20],
   x: [false, '3D X (Default is 0)', 'int', 0],
   y: [false, '3D Y for the start (Default is 0)', 'int', 0],
@@ -29,7 +33,11 @@ cli.parse({
 cli.main(function(args, options) {
   if (!options.server && !options.url) {
     var exampleUrl = "'http://0.0.0.0:3000/example.stl'"
-    var example = 'craster --url ' + exampleUrl + ' --port 3000'
+    var example = 'craster'
+    example += ' --url ' + exampleUrl
+    example += ' --port 3000'
+    example += ' --image tmp/craster.png'
+    example += ' --debug'
     cli.fatal("Please provide a URL. For example try:\n    " + example)
   }
 
@@ -72,9 +80,14 @@ cli.main(function(args, options) {
         if (status != 0) {
           cli.error('Command exited with a status of ' + status)
         } else {
-          cli.debug('Done')
+          cli.debug('Captures done')
         }
+
         if (!options['server']) server.close()
+
+        if (options.image) {
+          mergeImages(options.num, options.image)
+        }
       })
     }
   })
@@ -95,4 +108,22 @@ function phantomjs(args, log, onExit) {
     console.error(data.toString().trim())
   })
   cmd.on('exit', onExit)
+}
+
+function mergeImages(num, path) {
+  cli.debug('Merging captures to ' + path)
+
+  var imagePaths = Array.apply(null, Array(num)).map(function (_, i) {
+    return 'tmp/craster-' + i + '.png'
+  })
+
+  mergeImg(imagePaths, { direction: true }).then(function(img) {
+    img.write(path, function() {
+      cli.debug('Merge done')
+
+      async.concat(imagePaths, fs.unlink, function(err, files) {
+        cli.debug('Deleted temporary captures')
+      })
+    })
+  })
 }
