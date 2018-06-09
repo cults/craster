@@ -25,7 +25,7 @@ Usage
       -s, --no-progress      Disable progress
           --port NUMBER      Port for the temporary http server that serves the
                              viewer
-          --debug-wait       Keep http server open
+          --server           Keep http server open
       -k, --no-color         Omit color from output
           --debug            Show debug information
       -v, --version          Display the current version
@@ -46,7 +46,7 @@ Local Development
 
 ### Try with a fake file
 
-    $ bin/craster --port 3222 --url 'http://0.0.0.0:3222/example.stl' --debug --debug-wait
+    $ bin/craster --port 3000 --url 'http://0.0.0.0:3000/example.stl' --debug
     $ open tmp/craster-*
 
 ### Release

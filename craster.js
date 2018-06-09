@@ -19,15 +19,15 @@ cli.parse({
   'no-progress': ['s', 'Disable progress'],
   port: [
     false,
-    'Port for the temporary http server that serves the viewer',
+    'Port for the http server that serves the viewer',
     'int',
     0,
   ],
-  'debug-wait': [false, 'Debug and keep http server open'],
+  server: [false, 'Keep the http server open'],
 })
 
 cli.main(function(args, options) {
-  if (!options.url) {
+  if (!options.server && !options.url) {
     var exampleUrl = "'http://0.0.0.0:3000/example.stl'"
     var example = 'craster --url ' + exampleUrl + ' --port 3000'
     cli.fatal("Please provide a URL. For example try:\n    " + example)
@@ -39,42 +39,44 @@ cli.main(function(args, options) {
     var port = server.address().port
     cli.debug('HTTP server listening on ' + host + ':' + port)
 
-    var url = 'http://' + host + ':' + port + '/'
-    url += '?url=' + encodeURIComponent(options.url)
-    url += '&x=' + options.x
-    url += '&y=' + options.y
-    url += '&z=' + options.z
-    url += '&width=' + options.width
-    url += '&height=' + options.height
-    url += '&color=' + options.color
+    if (options.url) {
+      var url = 'http://' + host + ':' + port + '/'
+      url += '?url=' + encodeURIComponent(options.url)
+      url += '&x=' + options.x
+      url += '&y=' + options.y
+      url += '&z=' + options.z
+      url += '&width=' + options.width
+      url += '&height=' + options.height
+      url += '&color=' + options.color
 
-    function log(str) {
-      var match = str.match(/^(\d+)\/\d+: /)
-      if (match) {
-        if (!options['no-progress']) {
-          cli.progress((parseInt(match[1])+1) / options.num)
+      function log(str) {
+        var match = str.match(/^(\d+)\/\d+: /)
+        if (match) {
+          if (!options['no-progress']) {
+            cli.progress((parseInt(match[1])+1) / options.num)
+          }
+        } else {
+          cli.debug(str)
         }
-      } else {
-        cli.debug(str)
       }
+
+      var args = [
+        url,
+        options.path,
+        options.num,
+        options.width,
+        options.height,
+      ]
+
+      phantomjs(args, log, function(status) {
+        if (status != 0) {
+          cli.error('Command exited with a status of ' + status)
+        } else {
+          cli.debug('done')
+        }
+        if (!options['server']) server.close()
+      })
     }
-
-    var args = [
-      url,
-      options.path,
-      options.num,
-      options.width,
-      options.height,
-    ]
-
-    phantomjs(args, log, function(status) {
-      if (status != 0) {
-        cli.error('Command exited with a status of ' + status)
-      } else {
-        cli.debug('done')
-      }
-      if (!options['debug-wait']) server.close()
-    })
   })
 })
 
