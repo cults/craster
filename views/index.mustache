@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Craster 3D Viewer</title>
+    <style>
+      html, body { margin: 0; padding: 0 }
+    </style>
+  </head>
+  <body>
+    <canvas
+      width="{{ width }}"
+      height="{{ height }}"
+      data-3dviewer-color="{{ color }}"
+      data-3dviewer-url="{{ url }}"
+      data-3dviewer-x="{{ x }}"
+      data-3dviewer-y="{{ y }}"
+      data-3dviewer-z="{{ z }}"
+    ></canvas>
+
+    <script src="js/jsc3d.js"></script>
+    <script src="js/viewer.js"></script>
+  </body>
+</html>

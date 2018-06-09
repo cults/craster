@@ -4,20 +4,20 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const assets = require('connect-assets')
-const pug = require('pug')
+const mustacheExpress = require('mustache-express')
 
 // Setup app
 const http = express()
-http.engine('pug', pug.__express)
-http.set('views', path.join(__dirname, 'views'))
-http.set('view engine', 'pug')
+http.engine('mustache', mustacheExpress())
+http.set('view engine', 'mustache')
+http.set('views', __dirname + '/views')
 
 // Router
 const router = express.Router()
 router.get('/', function(req, res) {
   query = req.query
   res.render(
-    'index.pug',
+    'index.mustache',
     {
       url: query.url,
       color: query.color || 'eeeeee',
@@ -31,8 +31,8 @@ router.get('/', function(req, res) {
 })
 
 // Mount engines
-http.use(assets({ paths: [path.join(__dirname, 'assets', 'js')] }))
 http.use(express.static(path.join(__dirname, 'public')))
+http.use(express.static(path.join(__dirname, 'assets')))
 http.use('/', router)
 
 // catch 404 and forward to error handler
