@@ -48,18 +48,16 @@ function capture(url, path, total, width, height) {
   const increment = 360 / total
   const rotations = rotationsByIncrement(increment)
 
-  function imagePath(rotation) {
-    const num = ('000' + rotation).slice(-3)
-    const start = path.replace('.png', '')
-    return start + '-' + num + '.png'
+  function imagePath(num) {
+    return path.replace('.png', '') + '-' + num + '.png'
   }
 
-  function rotator(i, callback) {
-    const rotation = i * increment
-    console.log(i + '/' + total + ': Rotate to ' + rotation)
+  function rotator(index, callback) {
+    const rotation = index * increment
+    console.log(index + '/' + total + ': Rotate to ' + rotation)
     page.evaluate(rotateY, increment)
     delay(10, function() {
-      page.render(imagePath(rotation))
+      page.render(imagePath(index))
       callback()
     })
   }
