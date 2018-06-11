@@ -51,10 +51,10 @@ Local Development
 
 ### Release
 
-Change the version in `package.json`, then:
+Change the version in `package.json`, update the `CHANGELOG.md`, then:
 
     $ npm install
-    $ git add package.json package-lock.json
+    $ git add package.json package-lock.json CHANGELOG.md
     $ git commit -m v`jq -r '.version' < package.json`
     $ git tag v`jq -r '.version' < package.json`
     $ git push && git push --tags
