@@ -12,6 +12,9 @@ function urlSearchParams() {
 const options = urlSearchParams()
 const container = document.getElementsByTagName('canvas')[0]
 
+container.width = options.width
+container.height = options.height
+
 // See also https://code.google.com/p/jsc3d/wiki/StartupParameters
 const viewer = new JSC3D.Viewer(container)
 viewer.setParameter('SceneUrl', options.url)
