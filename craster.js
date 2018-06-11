@@ -1,7 +1,6 @@
 var spawn = require('child_process').spawn
 var cli = require('cli')
 var http = require('./http')
-var path = require('path')
 var package = require('./package.json')
 var mergeImg = require('merge-img')
 var fs = require('fs')
@@ -94,7 +93,7 @@ cli.main(function(args, options) {
 })
 
 function phantomjs(args, log, onExit) {
-  args.unshift(path.join(__dirname, 'capture.js'))
+  args.unshift(__dirname + '/capture.js')
   args.unshift('--web-security=false')
   var command = 'node_modules/.bin/phantomjs'
 
