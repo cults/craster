@@ -1,23 +1,24 @@
-const container = document.getElementsByTagName('canvas')[0]
-const attributes = container.attributes
+function urlSearchParams() {
+  const query = window.location.search.replace('?', '')
+  return query.split('&').reduce(function(memo, param) {
+    const optionTuple = param.split('=')
+    const key = decodeURIComponent(optionTuple[0])
+    const value = decodeURIComponent(optionTuple[1])
+    memo[key] = value
+    return memo
+  }, {})
+}
 
-const color = attributes['data-3dviewer-color'].value
-const url = attributes['data-3dviewer-url'].value
-const x = attributes['data-3dviewer-x'].value
-const y = attributes['data-3dviewer-y'].value
-const z = attributes['data-3dviewer-z'].value
+const options = urlSearchParams()
+const container = document.getElementsByTagName('canvas')[0]
 
 // See also https://code.google.com/p/jsc3d/wiki/StartupParameters
 const viewer = new JSC3D.Viewer(container)
-
-// Make it accessible to the browser
-window.viewer = viewer
-
-viewer.setParameter('SceneUrl', url)
-viewer.setParameter('ModelColor', '#' + color)
-viewer.setParameter('InitRotationX', x)
-viewer.setParameter('InitRotationY', y)
-viewer.setParameter('InitRotationZ', z)
+viewer.setParameter('SceneUrl', options.url)
+viewer.setParameter('ModelColor', '#' + options.color)
+viewer.setParameter('InitRotationX', options.x)
+viewer.setParameter('InitRotationY', options.y)
+viewer.setParameter('InitRotationZ', options.z)
 viewer.setParameter('RenderMode', 'flat') // can be 'smooth'
 viewer.setParameter('Renderer', 'webgl')
 viewer.setParameter('Background', 'off')
@@ -26,6 +27,8 @@ viewer.onloadingcomplete = function() {
   window._loadingComplete = true
 }
 
-console.log('JSC3D init ' + url)
+console.log('JSC3D init ' + options.url)
 viewer.init()
 viewer.update()
+
+window.viewer = viewer // Make it accessible to the browser
