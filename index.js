@@ -5,7 +5,26 @@ var async = require('async')
 
 var staticServer = require('./static-server')
 
+function captureOptions(options) {
+  return {
+    path: options.path,
+    image: options.image,
+    url: options.url,
+    color: options.color || 'eeeeee',
+    width: options.width || 1000,
+    height: options.height || 1000,
+    x: options.x || 0,
+    y: options.y || 0,
+    z: options.z || 0,
+    num: options.num || 20,
+    port: options.port || 0,
+    server: options.server || false,
+  }
+}
+
 function capture(options, debug, error, progress = null) {
+  options = captureOptions(options)
+
   staticServer.set('port', options.port)
   var server = staticServer.listen(options.port, function() {
     var host = '0.0.0.0'
