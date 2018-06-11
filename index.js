@@ -1,12 +1,13 @@
 var spawn = require('child_process').spawn
-var http = require('./http')
 var mergeImg = require('merge-img')
 var fs = require('fs')
 var async = require('async')
 
+var staticServer = require('./static-server')
+
 function capture(options, debug, error, progress = null) {
-  http.set('port', options.port)
-  var server = http.listen(options.port, function() {
+  staticServer.set('port', options.port)
+  var server = staticServer.listen(options.port, function() {
     var host = '0.0.0.0'
     var port = server.address().port
 
