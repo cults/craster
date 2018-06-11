@@ -7,14 +7,14 @@ const http = express()
 http.set('views', __dirname + '/views')
 
 // Router
-// const router = express.Router()
-// router.get('/', function(req, res) {
-//   res.render('viewer.html', crasterParams(req))
-// })
+const router = express.Router()
+router.get('/image', function(req, res) {
+  res.status(200).send(JSON.stringify({ ok: 200 }))
+})
 
 // Mount engines
 http.use(express.static(__dirname + '/public'))
-// http.use('/', router)
+http.use('/', router)
 
 // Catch 404 and forward to error handler
 http.use(function(req, res, next) {

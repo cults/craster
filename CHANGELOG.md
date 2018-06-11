@@ -7,6 +7,7 @@ Breaking changes:
 
 Changes:
 - Add an `--image` option to generate a composition image.
+- Extract craster to its own exported module.
 
 Fixes:
 - Remove multiple dependencies (pug, body-parser, debug, …).
