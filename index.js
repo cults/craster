@@ -7,7 +7,7 @@ var staticServer = require('./static-server')
 
 function captureOptions(options) {
   return {
-    path: options.path,
+    path: options.path || 'tmp/craster',
     image: options.image,
     url: options.url,
     color: options.color || 'eeeeee',
@@ -22,7 +22,7 @@ function captureOptions(options) {
   }
 }
 
-function capture(options, debug, error, progress = null) {
+function capture(options, debug, error, progress = null, done = function(){}) {
   options = captureOptions(options)
 
   staticServer.set('port', options.port)
@@ -71,7 +71,9 @@ function capture(options, debug, error, progress = null) {
         if (!options.server) server.close()
 
         if (options.image) {
-          mergeImages(options.num, options.image, debug)
+          mergeImages(options.num, options.image, debug, done)
+        } else {
+          done()
         }
       })
     }
@@ -95,7 +97,7 @@ function phantomjs(args, log, debug, error, onExit) {
   cmd.on('exit', onExit)
 }
 
-function mergeImages(num, path, debug) {
+function mergeImages(num, path, debug, done) {
   debug('Merging captures to ' + path)
 
   var imagePaths = Array.apply(null, Array(num)).map(function (_, i) {
@@ -108,6 +110,8 @@ function mergeImages(num, path, debug) {
 
       async.concat(imagePaths, fs.unlink, function(err, files) {
         debug('Deleted temporary captures')
+
+        done(path)
       })
     })
   })

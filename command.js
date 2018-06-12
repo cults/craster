@@ -1,6 +1,7 @@
 var cli = require('cli')
 var package = require('./package.json')
 var craster = require('./index')
+var api = require('./api')
 
 cli.enable('status', 'version')
 cli.setApp('craster', package.version)
@@ -23,10 +24,11 @@ cli.parse({
     0,
   ],
   server: [false, 'Keep the http server open'],
+  api: [false, 'Open the http API'],
 })
 
 cli.main(function(args, options) {
-  if (!options.server && !options.url) {
+  if (!options.api && !options.url) {
     var exampleUrl = "'http://0.0.0.0:3000/example.stl'"
     var example = 'craster'
     example += ' --url ' + exampleUrl
@@ -36,10 +38,20 @@ cli.main(function(args, options) {
     cli.fatal("Please provide a URL. For example try:\n    " + example)
   }
 
-  craster.capture(
-    options,
-    cli.debug,
-    cli.error,
-    !options['no-progress'] && cli.progress
-  )
+  if (options.api) {
+    var apiPort = 3100
+    api.set('port', apiPort)
+    api.listen(apiPort, function() {
+      cli.debug('API open on ' + apiPort)
+    })
+  }
+
+  if (options.url) {
+    craster.capture(
+      options,
+      cli.debug,
+      cli.error,
+      !options['no-progress'] && cli.progress
+    )
+  }
 })
