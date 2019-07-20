@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v2.0.0
+
 Breaking changes:
 - Rename `--debug-wait` option in favor of `--server`.
 - Final image filenames use an index (0, 1, 2, …) instead of
