@@ -56,7 +56,7 @@ function capture(url, path, total, width, height) {
     const rotation = index * increment
     console.log(index + '/' + total + ': Rotate to ' + rotation)
     page.evaluate(rotateY, increment)
-    delay(10, function() {
+    delay(20, function() {
       page.render(imagePath(index))
       callback()
     })
@@ -76,7 +76,9 @@ function capture(url, path, total, width, height) {
   page.clipRect = { top: 0, left: 0, width: width, height: height }
   page.open(url, function() {
     console.log('Wait until loading complete...')
-    waitUntil(isLoadingComplete, delay(100, start))
+    waitUntil(isLoadingComplete, function() {
+      delay(200, start)
+    })
   })
 }
 
