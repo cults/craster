@@ -1,6 +1,8 @@
 ## Unreleased
 
-Fixes:
+## v2.0.1
+
+Fix:
 - More wait time between captures, to help against blank images.
 
 ## v2.0.0
