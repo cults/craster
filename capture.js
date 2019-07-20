@@ -76,7 +76,7 @@ function capture(url, path, total, width, height) {
   page.clipRect = { top: 0, left: 0, width: width, height: height }
   page.open(url, function() {
     console.log('Wait until loading complete...')
-    waitUntil(isLoadingComplete, start)
+    waitUntil(isLoadingComplete, delay(100, start))
   })
 }
 

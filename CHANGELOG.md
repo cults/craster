@@ -1,4 +1,4 @@
-## unreleased
+## Unreleased
 
 Breaking changes:
 - Rename `--debug-wait` option in favor of `--server`.
@@ -11,7 +11,8 @@ Changes:
 
 Fixes:
 - Remove multiple dependencies (pug, body-parser, debug, …).
-- Update node dependecy.
+- Update node dependency.
+- Wait 100ms before starting captures, to fix blank first image.
 
 ## v1.5.13
 

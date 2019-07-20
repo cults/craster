@@ -37,7 +37,6 @@ Install
 
     $ npm install -g craster
 
-
 Local Development
 -----------------
 
