@@ -6,7 +6,7 @@ cli.enable('status', 'version')
 cli.setApp('craster', package.version)
 cli.parse({
   url: ['u', 'URL of the 3D model', 'string', false],
-  path: ['p', 'Captures path', 'path', 'tmp/craster'],
+  path: ['p', 'Base path for image captures', 'path', 'tmp/craster'],
   image: ['i', 'Path to final image', 'path', false],
   num: ['n', 'Number of captures', 'int', 20],
   x: [false, '3D X (Default is 0)', 'int', 0],
