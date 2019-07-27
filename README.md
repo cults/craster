@@ -46,7 +46,7 @@ Local Development
 
 ### Try with a fake file
 
-    $ bin/craster --port 3000 --url 'http://0.0.0.0:3000/example.stl' --debug
+    $ bin/craster --port 4000 --url 'http://0.0.0.0:4000/example.stl' --debug
     $ open tmp/craster-*
 
 ### Release

@@ -27,10 +27,10 @@ cli.parse({
 
 cli.main(function(args, options) {
   if (!options.server && !options.url) {
-    var exampleUrl = "'http://0.0.0.0:3000/example.stl'"
+    var exampleUrl = "'http://0.0.0.0:4000/example.stl'"
     var example = 'craster'
     example += ' --url ' + exampleUrl
-    example += ' --port 3000'
+    example += ' --port 4000'
     example += ' --image tmp/craster.png'
     example += ' --debug'
     cli.fatal("Please provide a URL. For example try:\n    " + example)
