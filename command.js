@@ -27,13 +27,18 @@ cli.parse({
 
 cli.main(function(args, options) {
   if (!options.server && !options.url) {
-    var exampleUrl = "'http://0.0.0.0:4000/example.stl'"
     var example = 'craster'
-    example += ' --url ' + exampleUrl
+    example += " --url 'http://0.0.0.0:4000/example.stl'"
     example += ' --port 4000'
     example += ' --image tmp/craster.png'
     example += ' --debug'
-    cli.fatal("Please provide a URL. For example try:\n    " + example)
+
+    var message = "Please provide a URL. For example try:\n"
+    message += "    " + example + "\n"
+    message += "Or see the list of options with:\n"
+    message += "    craster --help"
+
+    cli.fatal(message)
   }
 
   craster.capture(
