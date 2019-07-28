@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v3.0.0
+
 Breaking changes:
 - Drop support for setting the base path for image captures with `--path`.
   Instead, creates a temporary directory and cleans it up automatically.
