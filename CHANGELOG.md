@@ -7,7 +7,7 @@ Breaking changes:
 
 Fixes:
 - Debug prints a line for each capture.
-- Add remote URL for example STL.
+- Replace local example STL by remote URL.
 
 ## v2.0.1
 
