@@ -2,6 +2,8 @@ var spawn = require('child_process').spawn
 var mergeImg = require('merge-img')
 var fs = require('fs')
 var async = require('async')
+var tmp = require('tmp')
+var glob = require('glob')
 
 var staticServer = require('./static-server')
 
@@ -32,55 +34,56 @@ function capture(options, debug, error, progress = null) {
 
     debug('HTTP server listening on ' + host + ':' + port)
 
-    if (options.url) {
-      var url = 'http://' + host + ':' + port + '/'
-      url += '?url=' + encodeURIComponent(options.url)
-      url += '&x=' + options.x
-      url += '&y=' + options.y
-      url += '&z=' + options.z
-      url += '&width=' + options.width
-      url += '&height=' + options.height
-      url += '&color=' + options.color
+    var url = 'http://' + host + ':' + port + '/'
+    url += '?url=' + encodeURIComponent(options.url)
+    url += '&x=' + options.x
+    url += '&y=' + options.y
+    url += '&z=' + options.z
+    url += '&width=' + options.width
+    url += '&height=' + options.height
+    url += '&color=' + options.color
 
-      function phantomLog(str) {
-        var match = str.match(/^(\d+)\/\d+: /)
-        if (match) {
-          if (progress) {
-            progress((parseInt(match[1]) + 1) / options.num)
-          }
-        } else {
-          debug(str)
-        }
+    var tmpobj = tmp.dirSync({ unsafeCleanup: true })
+    debug('Temporary directory ' + tmpobj.name)
+
+    function phantomLog(str) {
+      var match = str.match(/^(\d+)\/\d+: /)
+      if (match && progress) {
+        progress((parseInt(match[1]) + 1) / options.num)
+      } else {
+        debug(str)
       }
+    }
 
-      var args = [
-        url,
-        options.path,
-        options.num,
-        options.width,
-        options.height,
-      ]
+    var phantomArgs = [
+      '--web-security=false',
+      __dirname + '/capture.js',
+      url,
+      tmpobj.name,
+      options.num,
+      options.width,
+      options.height,
+    ]
 
-      phantomjs(args, phantomLog, debug, error, function(status) {
-        if (status != 0) {
-          error('Command exited with a status of ' + status)
-        } else {
-          debug('Captures done')
-        }
+    phantomjsCommand(phantomArgs, phantomLog, debug, error, function(status) {
+      if (!options.server) server.close()
+      if (status != 0) return error('Command exited with ' + status)
 
-        if (!options.server) server.close()
+      debug('Captures done')
 
-        if (options.image) {
-          mergeImages(options.num, options.image, debug)
+      mergeImages({
+        dir: tmpobj.name,
+        finalPath: options.image,
+        debug,
+        done: function() {
+          tmpobj.removeCallback()
         }
       })
-    }
+    })
   })
 }
 
-function phantomjs(args, log, debug, error, onExit) {
-  args.unshift(__dirname + '/capture.js')
-  args.unshift('--web-security=false')
+function phantomjsCommand(args, log, debug, error, onExit) {
   var command = 'node_modules/.bin/phantomjs'
 
   debug(command + ' ' + args.join(' '))
@@ -95,19 +98,17 @@ function phantomjs(args, log, debug, error, onExit) {
   cmd.on('exit', onExit)
 }
 
-function mergeImages(num, path, debug) {
-  debug('Merging captures to ' + path)
+function mergeImages({ dir, finalPath, debug, done }) {
+  var globPath = dir + '/*.png'
+  debug('Merging ' + globPath + ' images to ' + finalPath)
 
-  var imagePaths = Array.apply(null, Array(num)).map(function (_, i) {
-    return 'tmp/craster-' + i + '.png'
-  })
+  glob(globPath, {}, function(err, files) {
+    if (err) throw err
 
-  mergeImg(imagePaths, { direction: true }).then(function(img) {
-    img.write(path, function() {
-      debug('Merge done')
-
-      async.concat(imagePaths, fs.unlink, function(err, files) {
-        debug('Deleted temporary captures')
+    mergeImg(files, { direction: true }).then(function(img) {
+      img.write(finalPath, function() {
+        debug('Merge done: ' + finalPath)
+        done()
       })
     })
   })

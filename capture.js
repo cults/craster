@@ -44,12 +44,12 @@ function integers(total) {
   return results
 }
 
-function capture(url, path, total, width, height) {
+function capture(url, tmpDir, total, width, height) {
   const increment = 360 / total
   const rotations = rotationsByIncrement(increment)
 
   function imagePath(num) {
-    return path.replace('.png', '') + '-' + num + '.png'
+    return tmpDir + '/craster-' + num + '.png'
   }
 
   function rotator(index, callback) {
@@ -63,7 +63,7 @@ function capture(url, path, total, width, height) {
   }
 
   function start() {
-    console.log('Starting captures in ' + path + '...')
+    console.log('Starting captures in ' + tmpDir + '...')
     page.evaluate(rotateY, 0)
     async.eachSeries(integers(total), rotator, function() {
       phantom.exit()
@@ -83,13 +83,13 @@ function capture(url, path, total, width, height) {
 }
 
 if (args.length != 6) {
-  console.log('Usage: phantomjs capture.js URL PATH TOTAL WIDTH HEIGHT')
+  console.log('Usage: phantomjs capture.js URL TMP_DIR TOTAL WIDTH HEIGHT')
   phantom.exit(1)
 } else {
   const url = args[1]
-  const path = args[2]
+  const tmpDir = args[2]
   const total = parseInt(args[3], 10)
   const width = parseInt(args[4], 10)
   const height = parseInt(args[5], 10)
-  capture(url, path, total, width, height)
+  capture(url, tmpDir, total, width, height)
 }

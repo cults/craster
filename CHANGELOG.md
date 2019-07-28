@@ -1,5 +1,14 @@
 ## Unreleased
 
+Breaking changes:
+- Drop support for setting the base path for image captures with `--path`.
+  Instead, creates a temporary directory and cleans it up automatically.
+- Require the `--image` option.
+
+Fixes:
+- Debug prints a line for each capture.
+- Add remote URL for example STL.
+
 ## v2.0.1
 
 Fix:

@@ -7,7 +7,7 @@ Rasterization thanks to JSC3D, browser emulation and captures thanks to
 PhantomJS.
 
 Usage
-------
+-----
 
     $ craster --help
     Usage:
@@ -15,7 +15,6 @@ Usage
 
     Options:
       -u, --url STRING       URL of the 3D model
-      -p, --path [PATH]      Base path for image captures (Default is tmp/craster)
       -i, --image PATH       Path to final image
       -n, --num [NUMBER]     Number of captures (Default is 20)
       -x NUMBER              3D X (Default is 0)
@@ -32,6 +31,11 @@ Usage
       -v, --version          Display the current version
       -h, --help             Display help and usage details
 
+Example
+-------
+
+    $ craster --url http://wtf.sunfox.org/3d/cults-logo.stl --image logo.png
+
 Install
 -------
 
@@ -44,10 +48,9 @@ Local Development
     $ cd craster
     $ npm install
 
-### Try with a fake file
+### Local command
 
-    $ bin/craster --port 4000 --url 'http://0.0.0.0:4000/example.stl' --debug
-    $ open tmp/craster-*
+    $ bin/craster
 
 ### Release
 

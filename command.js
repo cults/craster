@@ -6,7 +6,6 @@ cli.enable('status', 'version')
 cli.setApp('craster', package.version)
 cli.parse({
   url: ['u', 'URL of the 3D model', 'string', false],
-  path: ['p', 'Base path for image captures', 'path', 'tmp/craster'],
   image: ['i', 'Path to final image', 'path', false],
   num: ['n', 'Number of captures', 'int', 20],
   x: [false, '3D X (Default is 0)', 'int', 0],
@@ -26,14 +25,13 @@ cli.parse({
 })
 
 cli.main(function(args, options) {
-  if (!options.server && !options.url) {
+  if (!options.server && (!options.url || !options.image)) {
     var example = 'craster'
-    example += " --url 'http://0.0.0.0:4000/example.stl'"
-    example += ' --port 4000'
+    example += " --url http://wtf.sunfox.org/3d/cults-logo.stl"
     example += ' --image tmp/craster.png'
     example += ' --debug'
 
-    var message = "Please provide a URL. For example try:\n"
+    var message = "Please provide a URL and the final path. For example try:\n"
     message += "    " + example + "\n"
     message += "Or see the list of options with:\n"
     message += "    craster --help"
