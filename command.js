@@ -28,7 +28,7 @@ cli.main(function(args, options) {
   if (!options.server && (!options.url || !options.image)) {
     var example = 'craster'
     example += " --url http://wtf.sunfox.org/3d/cults-logo.stl"
-    example += ' --image tmp/craster.png'
+    example += ' --image logo.png'
     example += ' --debug'
 
     var message = "Please provide a URL and the final path. For example try:\n"

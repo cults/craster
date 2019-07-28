@@ -1,5 +1,8 @@
 ## Unreleased
 
+Fix:
+- Better example path for `--image` on the command line.
+
 ## v3.0.0
 
 Breaking changes:
