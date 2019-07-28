@@ -25,6 +25,7 @@ viewer.setParameter('InitRotationZ', options.z)
 viewer.setParameter('RenderMode', 'flat') // can be 'smooth'
 viewer.setParameter('Renderer', 'webgl')
 viewer.setParameter('Background', 'off')
+viewer.setParameter('Definition', 'standard')
 viewer.setParameter('ProgressBar', 'off')
 viewer.onloadingcomplete = function() {
   window._loadingComplete = true

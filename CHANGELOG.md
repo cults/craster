@@ -6,6 +6,7 @@ Breaking changes:
 - Require the `--image` option.
 
 Fixes:
+- Double the quality of screenshots by adding a zoomFactor.
 - Debug prints a line for each capture.
 - Replace local example STL by remote URL.
 

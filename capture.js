@@ -70,10 +70,11 @@ function capture(url, tmpDir, total, width, height) {
     })
   }
 
-  page.onConsoleMessage = function(msg) { console.log('console: ' + msg) }
   page.viewportSize = { width: width, height: height }
   page.paperSize = { width: width, height: height }
   page.clipRect = { top: 0, left: 0, width: width, height: height }
+
+  page.onConsoleMessage = function(msg) { console.log('console: ' + msg) }
   page.open(url, function() {
     console.log('Wait until loading complete...')
     waitUntil(isLoadingComplete, function() {
