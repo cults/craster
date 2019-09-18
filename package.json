@@ -28,7 +28,7 @@
   "engines": {
     "node": ">=8.9.4"
   },
-  "licence": "MIT",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sunny/craster/issues"
   }
