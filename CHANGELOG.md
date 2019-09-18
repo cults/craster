@@ -1,7 +1,10 @@
 ## Unreleased
 
-Fix:
+## v3.0.1
+
+Fixes:
 - Better example path for `--image` on the command line.
+- Higher definition.
 
 ## v3.0.0
 
