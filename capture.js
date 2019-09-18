@@ -62,14 +62,12 @@ function capture(url, tmpDir, total, width, height) {
     })
   }
 
-  function done() {
-    phantom.exit()
-  }
-
   function start() {
     console.log('Starting captures in ' + tmpDir + '...')
     page.evaluate(rotateY, 0)
-    async.eachSeries(integers(total), rotator, done)
+    async.eachSeries(integers(total), rotator, function() {
+      phantom.exit()
+    })
   }
 
   page.viewportSize = { width: width, height: height }
