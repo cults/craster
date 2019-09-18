@@ -39,8 +39,6 @@ function capture(options, debug, error, progress = null) {
     url += '&x=' + options.x
     url += '&y=' + options.y
     url += '&z=' + options.z
-    url += '&width=' + options.width
-    url += '&height=' + options.height
     url += '&color=' + options.color
 
     var tmpobj = tmp.dirSync({ unsafeCleanup: true })

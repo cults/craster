@@ -12,8 +12,8 @@ function urlSearchParams() {
 const options = urlSearchParams()
 const container = document.getElementsByTagName('canvas')[0]
 
-container.width = options.width
-container.height = options.height
+container.width = window.innerWidth
+container.height = window.innerHeight
 
 // See also https://code.google.com/p/jsc3d/wiki/StartupParameters
 const viewer = new JSC3D.Viewer(container)
