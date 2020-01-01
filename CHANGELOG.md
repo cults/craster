@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v3.1.0
+
 Change:
 
 - Accept local path to 3D model with `--path`.
