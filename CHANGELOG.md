@@ -1,19 +1,28 @@
+# Changelog
+
 ## Unreleased
+
+Change:
+
+- Accept local path to 3D model with `--path`.
 
 ## v3.0.1
 
 Fixes:
+
 - Better example path for `--image` on the command line.
 - Higher definition.
 
 ## v3.0.0
 
 Breaking changes:
+
 - Drop support for setting the base path for image captures with `--path`.
   Instead, creates a temporary directory and cleans it up automatically.
 - Require the `--image` option.
 
 Fixes:
+
 - Double the quality of screenshots by adding a zoomFactor.
 - Debug prints a line for each capture.
 - Replace local example STL by remote URL.
@@ -21,20 +30,24 @@ Fixes:
 ## v2.0.1
 
 Fix:
+
 - More wait time between captures, to help against blank images.
 
 ## v2.0.0
 
 Breaking changes:
+
 - Rename `--debug-wait` option in favor of `--server`.
 - Final image filenames use an index (0, 1, 2, …) instead of
   a rotation (000, 060, 120, …).
 
 Changes:
+
 - Add an `--image` option to generate a composition image.
 - Extract craster to its own exported module.
 
 Fixes:
+
 - Remove multiple dependencies (pug, body-parser, debug, …).
 - Update node dependency.
 - Wait 100ms before starting captures, to fix blank first image.

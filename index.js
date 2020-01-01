@@ -8,10 +8,12 @@ var glob = require('glob')
 var staticServer = require('./static-server')
 
 function captureOptions(options) {
+  var url = options.url
+  if (options.path) url = '/file.stl?path=' + encodeURIComponent(options.path)
+
   return {
-    path: options.path,
+    url: url,
     image: options.image,
-    url: options.url,
     color: options.color || 'eeeeee',
     width: options.width || 1000,
     height: options.height || 1000,
@@ -28,21 +30,21 @@ function capture(options, debug, error, progress = null) {
   options = captureOptions(options)
 
   staticServer.set('port', options.port)
-  var server = staticServer.listen(options.port, function() {
+  var server = staticServer.listen(options.port, function () {
     var host = '0.0.0.0'
     var port = server.address().port
 
     debug('HTTP server listening on ' + host + ':' + port)
 
     var url = 'http://' + host + ':' + port + '/'
-    url += '?url=' + encodeURIComponent(options.url)
-    url += '&x=' + options.x
+    url += '?x=' + options.x
     url += '&y=' + options.y
     url += '&z=' + options.z
     url += '&color=' + options.color
+    if (options.url) url += '&url=' + encodeURIComponent(options.url)
 
-    var tmpobj = tmp.dirSync({ unsafeCleanup: true })
-    debug('Temporary directory ' + tmpobj.name)
+    var tmpDir = tmp.dirSync({ unsafeCleanup: true })
+    debug('Temporary directory ' + tmpDir.name)
 
     function phantomLog(str) {
       var match = str.match(/^(\d+)\/\d+: /)
@@ -57,24 +59,24 @@ function capture(options, debug, error, progress = null) {
       '--web-security=false',
       __dirname + '/capture.js',
       url,
-      tmpobj.name,
+      tmpDir.name,
       options.num,
       options.width,
       options.height,
     ]
 
-    phantomjsCommand(phantomArgs, phantomLog, debug, error, function(status) {
+    phantomjsCommand(phantomArgs, phantomLog, debug, error, function (status) {
       if (!options.server) server.close()
       if (status != 0) return error('Command exited with ' + status)
 
       debug('Captures done')
 
       mergeImages({
-        dir: tmpobj.name,
+        dir: tmpDir.name,
         finalPath: options.image,
         debug,
-        done: function() {
-          tmpobj.removeCallback()
+        done: function () {
+          tmpDir.removeCallback()
         }
       })
     })
@@ -87,10 +89,10 @@ function phantomjsCommand(args, log, debug, error, onExit) {
   debug(command + ' ' + args.join(' '))
 
   var cmd = spawn(command, args)
-  cmd.stdout.on('data', function(data) {
+  cmd.stdout.on('data', function (data) {
     log(data.toString().trim())
   })
-  cmd.stderr.on('data', function(data) {
+  cmd.stderr.on('data', function (data) {
     error(data.toString().trim())
   })
   cmd.on('exit', onExit)
@@ -100,11 +102,11 @@ function mergeImages({ dir, finalPath, debug, done }) {
   var globPath = dir + '/*.png'
   debug('Merging ' + globPath + ' images to ' + finalPath)
 
-  glob(globPath, {}, function(err, files) {
+  glob(globPath, {}, function (err, files) {
     if (err) throw err
 
-    mergeImg(files, { direction: true }).then(function(img) {
-      img.write(finalPath, function() {
+    mergeImg(files, { direction: true }).then(function (img) {
+      img.write(finalPath, function () {
         debug('Merge done: ' + finalPath)
         done()
       })

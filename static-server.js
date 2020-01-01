@@ -1,8 +1,14 @@
 // Express app that serves the HTML and JavaScript for the 3D rendering.
 
 const express = require('express')
-const staticServer = express()
+const app = express()
 
-staticServer.use(express.static(__dirname + '/public'))
+// Serve static pages.
+app.use(express.static(__dirname + '/public'))
 
-module.exports = staticServer
+// Serve local file by the given "?path=" parameter.
+app.get('/file.stl', function (req, res) {
+  res.sendFile(req.query.path)
+})
+
+module.exports = app
