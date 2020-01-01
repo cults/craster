@@ -1,13 +1,11 @@
-Craster
-=======
+# Craster
 
 Turn 3D models into PNGs.
 
 Rasterization thanks to JSC3D, browser emulation and captures thanks to
 PhantomJS.
 
-Usage
------
+## Usage
 
     $ craster --help
     Usage:
@@ -15,6 +13,7 @@ Usage
 
     Options:
       -u, --url STRING       URL of the 3D model
+          --path STRING      Path of the 3D model
       -i, --image PATH       Path to final image
       -n, --num [NUMBER]     Number of captures (Default is 20)
       -x NUMBER              3D X (Default is 0)
@@ -31,18 +30,22 @@ Usage
       -v, --version          Display the current version
       -h, --help             Display help and usage details
 
-Example
--------
+## Example
 
     $ craster --url http://wtf.sunfox.org/3d/cults-logo.stl --image logo.png
 
-Install
--------
+<details>
+<summary>logo.png</summary>
+
+![logo.png](https://user-images.githubusercontent.com/132/71644392-d280ec80-2cc7-11ea-9e85-856a65ea5ae1.png)
+
+</details>
+
+## Install
 
     $ npm install -g craster
 
-Local Development
------------------
+## Local Development
 
     $ git clone https://github.com/sunny/craster
     $ cd craster
