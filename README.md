@@ -57,7 +57,9 @@ You can then use the following command:
 
 ### Release
 
-Change the version in `package.json`, update the `CHANGELOG.md`, then:
+Make sure you have the `jq` package installed.
+
+Then change the version in `package.json`, update the `CHANGELOG.md`, then:
 
     $ npm install
     $ git add package.json package-lock.json CHANGELOG.md

@@ -2,9 +2,11 @@
 
 ## Unreleased
 
+## v3.1.1
+
 Fix:
 
-- Throw early errors before merging too few images.
+- Throw early errors before merging too few images to help debugging.
 
 ## v3.1.0
 
