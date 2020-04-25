@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+Fix:
+
+- Throw early errors before merging too few images.
+
 ## v3.1.0
 
 Change:

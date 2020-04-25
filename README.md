@@ -51,7 +51,7 @@ PhantomJS.
     $ cd craster
     $ npm install
 
-### Local command
+You can then use the following command:
 
     $ bin/craster
 

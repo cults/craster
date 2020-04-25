@@ -68,6 +68,9 @@ function capture(options, debug, error, progress = null) {
     phantomjsCommand(phantomArgs, phantomLog, debug, error, function (status) {
       if (!options.server) server.close()
       if (status != 0) return error('Command exited with ' + status)
+      if (fs.readdirSync(tmpDir.name).length === 0) {
+        return error('Capture directory empty: ' + tmpDir.name)
+      }
 
       debug('Captures done')
 
@@ -104,6 +107,8 @@ function mergeImages({ dir, finalPath, debug, done }) {
 
   glob(globPath, {}, function (err, files) {
     if (err) throw err
+    if (files.length == 0) throw 'No files found at ' + globPath
+    if (files.length == 1) throw 'Only one file found at ' + globPath
 
     mergeImg(files, { direction: true }).then(function (img) {
       img.write(finalPath, function () {
