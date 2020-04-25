@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v3.1.2
+
 Fix:
 
 - Throw early error if remote URL does not respond with a 200 HTTP code.
