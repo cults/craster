@@ -2,6 +2,17 @@ const args = require('system').args
 const async = require('async')
 const page = require('webpage').create()
 
+// Handle HTTP timeouts
+page.settings.resourceTimeout = 60 * 1000 // 60 seconds
+page.onResourceTimeout = function(request) {
+  message = 'Timed out resource at ' + request.url + '. '
+  message += 'Code: ' + request.errorCode + '. '
+  message += 'Error: ' + request.errorString
+
+  console.log(message)
+  phantom.exit(1);
+}
+
 function delay(duration, callback) {
   setTimeout(callback, duration)
 }

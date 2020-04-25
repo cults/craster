@@ -4,6 +4,9 @@ var fs = require('fs')
 var async = require('async')
 var tmp = require('tmp')
 var glob = require('glob')
+var http = require('http')
+var https = require('https')
+var url = require('url')
 
 var staticServer = require('./static-server')
 
@@ -27,6 +30,18 @@ function captureOptions(options) {
 }
 
 function capture(options, debug, error, progress = null) {
+  headRequest(options.url, function(response, e) {
+    if (e) {
+      error('Could not find ' + options.url + ' ' + JSON.stringify(e))
+    } else if (response.statusCode != 200) {
+      error('Response code ' + response.statusCode + ' for ' + options.url)
+    } else {
+      serveAndCapture(options, debug, error, progress)
+    }
+  })
+}
+
+function serveAndCapture(options, debug, error, progress = null) {
   options = captureOptions(options)
 
   staticServer.set('port', options.port)
@@ -85,6 +100,26 @@ function capture(options, debug, error, progress = null) {
     })
   })
 }
+
+function headRequest(requestedUrl, callback) {
+  const parsedURL = url.parse(requestedUrl)
+  const options = {
+    protocol: parsedURL.protocol,
+    hostname: parsedURL.hostname,
+    method: 'HEAD',
+    path: parsedURL.path
+  }
+  let protocolHandler = (parsedURL.protocol === 'https:' ? https : http)
+
+  request = protocolHandler.request(options, (response) => {
+    callback(response, null)
+  })
+  request.on('error', (e) => {
+    callback(null, e)
+  })
+  request.end()
+}
+
 
 function phantomjsCommand(args, log, debug, error, onExit) {
   var command = 'node_modules/.bin/phantomjs'
