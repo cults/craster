@@ -23,7 +23,7 @@
     "glob": "^7.1.4",
     "merge-img": "^2.1.2",
     "phantomjs-prebuilt": "2.1.16",
-    "tmp": "^0.1.0"
+    "tmp": "^0.2.0"
   },
   "engines": {
     "node": ">=8.9.4"
