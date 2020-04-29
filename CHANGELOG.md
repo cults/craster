@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+Fix:
+
+- Abort with error code when capture directory is empty.
+
 ## v3.1.2
 
 Fix:

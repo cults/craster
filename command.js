@@ -52,7 +52,7 @@ cli.main(function (args, options) {
   craster.capture(
     options,
     cli.debug,
-    cli.error,
+    cli.fatal,
     !options['no-progress'] && cli.progress
   )
 })

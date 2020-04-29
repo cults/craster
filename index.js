@@ -120,7 +120,6 @@ function headRequest(requestedUrl, callback) {
   request.end()
 }
 
-
 function phantomjsCommand(args, log, debug, error, onExit) {
   var command = 'node_modules/.bin/phantomjs'
 
