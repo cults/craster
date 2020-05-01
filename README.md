@@ -1,9 +1,7 @@
 # Craster
 
-Turn 3D models into PNGs.
-
-Rasterization thanks to JSC3D, browser emulation and captures thanks to
-PhantomJS.
+Turns 3D models into images. Accepts STL, OBJ and 3DS files and returns a PNG
+sprite image with 360° rotations.
 
 ## Usage
 
