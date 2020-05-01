@@ -1,6 +1,6 @@
 # Craster
 
-Turns 3D models into images. Accepts STL, OBJ and 3DS files and returns a PNG
+Turns 3D models into images. Accepts STL, OBJ, and 3DS files and returns a PNG
 sprite image with 360° rotations.
 
 ## Usage
