@@ -30,21 +30,9 @@ function captureOptions(options) {
 }
 
 function capture(options, debug, error, progress = null) {
-  headRequest(options.url, function(response, e) {
-    if (e) {
-      error('Could not find ' + options.url + ' ' + JSON.stringify(e))
-    } else if (response.statusCode != 200) {
-      error('Response code ' + response.statusCode + ' for ' + options.url)
-    } else {
-      serveAndCapture(options, debug, error, progress)
-    }
-  })
-}
-
-function serveAndCapture(options, debug, error, progress = null) {
   options = captureOptions(options)
-
   staticServer.set('port', options.port)
+
   var server = staticServer.listen(options.port, function () {
     var host = '0.0.0.0'
     var port = server.address().port
