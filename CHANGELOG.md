@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+Fix:
+
+- Remove extra HEAD request.
+
 ## v3.1.3
 
 Fix:
