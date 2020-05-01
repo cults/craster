@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v3.1.4
+
 Fix:
 
 - Remove extra HEAD request.
