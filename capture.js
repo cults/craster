@@ -33,14 +33,6 @@ function rotateY(y) {
   window.viewer.update()
 }
 
-function rotationsByIncrement(increment) {
-  const results = []
-  for (var i = 0; i < 360; i += increment) {
-    results.push(i)
-  }
-  return results
-}
-
 function isLoadingComplete() {
   return page.evaluate(function() {
     return window._loadingComplete
@@ -57,7 +49,6 @@ function integers(total) {
 
 function capture(url, tmpDir, total, width, height) {
   const increment = 360 / total
-  const rotations = rotationsByIncrement(increment)
 
   function imagePath(num) {
     return tmpDir + '/craster-' + num + '.png'
