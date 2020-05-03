@@ -53,6 +53,13 @@ You can then use the following command:
 
     $ bin/craster
 
+To test in a browser, you can use `--server --port 9000` to keep the server
+open on a given port. You may need to launch a browser with CORS disabled.
+E.g., for Chrome under OS X:
+
+    $ open -na /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+      --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security
+
 ### Release
 
 Make sure you have the `jq` package installed.
