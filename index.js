@@ -132,6 +132,7 @@ function mergeImages({ dir, finalPath, debug, done }) {
     if (files.length == 0) throw 'No files found at ' + globPath
     if (files.length == 1) throw 'Only one file found at ' + globPath
 
+    files = sortFiles(files)
     mergeImg(files, { direction: true }).then(function (img) {
       img.write(finalPath, function () {
         debug('Merge done: ' + finalPath)
@@ -139,6 +140,16 @@ function mergeImages({ dir, finalPath, debug, done }) {
       })
     })
   })
+}
+
+function sortFiles(paths) {
+  return paths.sort(function (a, b) {
+    return pathToInt(a) - pathToInt(b)
+  })
+}
+
+function pathToInt(path) {
+  return parseInt(path.replace(/^.*craster-(\d+)\.png$/i, '$1'), 10)
 }
 
 module.exports.capture = capture

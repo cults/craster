@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+Fix:
+
+- Better file sorting after glob.
+
 ## v3.1.4
 
 Fix:
