@@ -67,8 +67,10 @@ function capture(url, tmpDir, total, width, height) {
   function start() {
     console.log('Starting captures in ' + tmpDir + '...')
     page.evaluate(rotateY, 0)
-    async.eachSeries(integers(total), rotator, function() {
-      phantom.exit()
+    delay(20, function() {
+      async.eachSeries(integers(total), rotator, function() {
+        phantom.exit()
+      })
     })
   }
 
