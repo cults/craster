@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v3.1.6
+
 Fix:
 
 - Wait 20ms before starting first capture to avoid first empty shot.
