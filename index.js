@@ -29,7 +29,7 @@ function captureOptions(options) {
   }
 }
 
-function capture(options, debug, error, progress = null) {
+function capture(options, debug, error, progress = null, complete = null) {
   options = captureOptions(options)
   staticServer.set('port', options.port)
 
@@ -83,6 +83,7 @@ function capture(options, debug, error, progress = null) {
         debug,
         done: function () {
           tmpDir.removeCallback()
+          complete && complete();
         }
       })
     })
