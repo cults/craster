@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## v3.2.0
+
+Feature:
+
+- Add callback for completion of file merge.
+
 ## v3.1.6
 
 Fix:
