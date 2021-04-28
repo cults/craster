@@ -1,0 +1,13 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 3
+  ignore:
+  - dependency-name: glob
+    versions:
+    - "> 7.1.5, < 7.2"
+  rebase-strategy: disabled
