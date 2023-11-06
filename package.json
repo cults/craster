@@ -17,7 +17,7 @@
     "url": "https://github.com/sunny/craster"
   },
   "dependencies": {
-    "async": "3.2.4",
+    "async": "3.2.5",
     "cli": "1.0.1",
     "express": "^4.16.3",
     "glob": "^10.0.0",
